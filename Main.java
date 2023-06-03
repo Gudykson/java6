@@ -60,15 +60,27 @@ class Main {
         return age;
     }
 public static String ReadDate() throws WrongDateOfBirth {
-        
+        scan.nextLine();
         System.out.println("Podaj datę urodzenia DD-MM-YYYY");
-        String date  = scan.nextLine();
-        int dec = Integer.parseInt(date.charAt(0));
-        int jedn = Integer.parseInt(date.charAt(1));
-        if((10*dec + jedn)>31)
+        String date = scan.nextLine();
+        String[] arrSplit = date.split("-");
+  
+        for (int i = 0; i < date.length(); i++) 
+        {
+            char c = date.charAt(i);
+            if (Character.isLetter(c)) throw new WrongDateOfBirth();
+                
+        }
+        
+        int day = Integer.parseInt(arrSplit[0]);
+        int month = Integer.parseInt(arrSplit[1]);
+        int year = Integer.parseInt(arrSplit[2]);
+  
+        if( day > 31 || day < 1 || month > 12 || month < 1 || year > 2023 || year < 1900 || (month == 2 && day > 28) )
             throw new WrongDateOfBirth();
 
         return date;
+        
     }
     public static void exercise1() throws IOException, WrongStudentName, WrongAge , WrongDateOfBirth {
         var name = ReadName();
