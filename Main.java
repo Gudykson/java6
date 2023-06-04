@@ -63,7 +63,15 @@ public static String ReadDate() throws WrongDateOfBirth {
         scan.nextLine();
         System.out.println("Podaj datę urodzenia DD-MM-YYYY");
         String date = scan.nextLine();
-        String[] arrSplit = date.split("-");
+        if(date.length() != 10) throw new WrongDateOfBirth(); 
+        char lemao1 = date.charAt(2);
+        char lemao2 = date.charAt(5);
+
+        String minus1 = String.valueOf(lemao1);
+        String minus2 = String.valueOf(lemao2);
+
+        if (minus1.equals("-") && minus2.equals("-") ) {
+          String[] arrSplit = date.split("-");
   
         for (int i = 0; i < date.length(); i++) 
         {
@@ -80,6 +88,8 @@ public static String ReadDate() throws WrongDateOfBirth {
             throw new WrongDateOfBirth();
 
         return date;
+        
+        } else throw new WrongDateOfBirth();
         
     }
     public static void exercise1() throws IOException, WrongStudentName, WrongAge , WrongDateOfBirth {
